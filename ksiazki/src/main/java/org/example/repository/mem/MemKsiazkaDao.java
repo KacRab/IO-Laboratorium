@@ -5,11 +5,12 @@ import org.example.model.Ksiazka;
 import org.example.model.Ksiegarnia;
 import org.example.repository.KsiazkaDao;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class MemKsiazkaDao implements KsiazkaDao {
     @Override
     public List<Ksiazka> findAll() {

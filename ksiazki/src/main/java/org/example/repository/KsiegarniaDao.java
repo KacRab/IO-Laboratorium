@@ -12,4 +12,6 @@ public interface KsiegarniaDao {
     Ksiegarnia findById(int id);
 
     List<Ksiegarnia> findByKsiazka(Ksiazka k);
+
+    Ksiegarnia save(Ksiegarnia ksiegarnia);
 }

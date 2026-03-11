@@ -14,4 +14,6 @@ public interface KsiegarniaService {
     List<Ksiegarnia> getKsiegarnieByKsiazka(Ksiazka m);
 
     List<Ksiazka> getKsiazkiInKsiegarnia(Ksiegarnia c);
+
+    Ksiegarnia addKsiegarnia(Ksiegarnia ksiegarnia);
 }
