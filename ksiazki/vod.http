@@ -17,9 +17,31 @@ Accept: application/json
 ### create new ksiegarnia
 POST http://localhost:8080/webapi/ksiegarnie
 Content-Type: application/json
-Accept-Language: en
+Accept-Language: pl
 
 {
   "name": "Ksiegarnia Słońce",
   "logo": "https://img.redro.pl/obrazy/symbol-slonce-na-bialym-tle-700-132008340.jpg"
+}
+
+
+
+### get all ksiazki
+GET http://localhost:8080/webapi/ksiazki
+
+### get ksiazki by id
+GET http://localhost:8080/webapi/ksiazki/1
+
+### get ksiazki sold in ksiegarnia
+GET http://localhost:8080/webapi/ksiegarnie/1/ksiazki
+
+### create new ksiazka
+POST http://localhost:8080/webapi/ksiazki
+Content-Type: application/json
+
+{
+  "title": "Szpony i kły",
+  "cover": "https://bigimg.taniaksiazka.pl/images/popups/3BA/9788375781557.jpg",
+  "rating": "5",
+  "autorId": 1
 }

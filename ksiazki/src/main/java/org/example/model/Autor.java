@@ -1,5 +1,7 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ public class Autor {
     private int id;
     private String firstName;
     private String lastName;
+    @JsonIgnore
     private List<Ksiazka> ksiazki = new ArrayList<>();
 
     public Autor(int id, String firstName, String lastName) {
