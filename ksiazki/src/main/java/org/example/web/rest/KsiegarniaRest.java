@@ -1,16 +1,22 @@
 package org.example.web.rest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.model.Ksiazka;
 import org.example.model.Ksiegarnia;
 import org.example.service.KsiazkaService;
 import org.example.service.KsiegarniaService;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +26,8 @@ public class KsiegarniaRest {
 
     private final KsiegarniaService ksiegarniaService;
     private final KsiazkaService ksiazkaService;
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
 
     @GetMapping("/ksiegarnie")
     List<Ksiegarnia> getKsiegarnie(
@@ -61,9 +69,17 @@ public class KsiegarniaRest {
     }
 
     @PostMapping("/ksiegarnie")
-    ResponseEntity<Ksiegarnia> addKsiegarnia(@RequestBody Ksiegarnia ksiegarnia) {
+    ResponseEntity<?> addKsiegarnia(@Validated @RequestBody Ksiegarnia ksiegarnia, Errors errors, HttpServletRequest request) {
         log.info("about to add new ksiegarnia {}", ksiegarnia);
-        // TODO validation
+
+        if(errors.hasErrors()) {
+            Locale locale = localeResolver.resolveLocale(request);
+            String errorMessage = errors.getAllErrors().stream()
+                    .map(oe->messageSource.getMessage(oe.getCode(), new Object[0], locale))
+                    .reduce("errors:\n", (accu, oe)->accu+oe + "\n");
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
         ksiegarnia = ksiegarniaService.addKsiegarnia(ksiegarnia);
         log.info("new ksiegarnia added {}", ksiegarnia);
         return ResponseEntity.status(HttpStatus.CREATED).body(ksiegarnia);

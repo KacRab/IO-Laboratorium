@@ -17,6 +17,7 @@ Accept: application/json
 ### create new ksiegarnia
 POST http://localhost:8080/webapi/ksiegarnie
 Content-Type: application/json
+Accept-Language: en
 
 {
   "name": "Ksiegarnia Słońce",
