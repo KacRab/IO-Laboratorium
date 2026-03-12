@@ -11,6 +11,6 @@ public class VodAdvice {
 
     private final KsiegarniaValidator validator;
 
-    @InitBinder
+    @InitBinder("ksiegarnia")
     void initBinder(WebDataBinder binder) {binder.addValidators(validator);}
 }
