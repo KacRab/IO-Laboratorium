@@ -44,6 +44,11 @@ public class KsiegarniaRest {
         log.info("phrase param: {}", phrase);
         log.info("custom-header param: {}", customHeader);
         log.info("some-cookie value: {}", someCookie);
+
+        if(phrase!=null && phrase.equals("foo")){
+            throw new IllegalArgumentException("foo");
+        }
+
         List<Ksiegarnia> ksiegarnie = ksiegarniaService.getAllKsiegarnie();
         log.info("{} ksiegarnie found", ksiegarnie.size());
         return ksiegarnie;

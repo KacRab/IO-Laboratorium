@@ -10,6 +10,8 @@ import org.example.web.rest.dto.KsiazkaDTO;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -60,8 +62,11 @@ public class KsiazkaRest {
     }
 
     @PostMapping("/ksiazki")
-    ResponseEntity<?> addKsiazka(@RequestBody KsiazkaDTO ksiazkaDTO){
+    ResponseEntity<?> addKsiazka(@Validated @RequestBody KsiazkaDTO ksiazkaDTO, Errors errors){
         log.info("about to add new ksiazka {}", ksiazkaDTO);
+        if(errors.hasErrors()){
+            return ResponseEntity.badRequest().build();
+        }
         Ksiazka ksiazka = new Ksiazka();
         ksiazka.setTitle(ksiazkaDTO.getTitle());
         ksiazka.setCover(ksiazkaDTO.getCover());

@@ -2,7 +2,7 @@
 GET http://localhost:8080/webapi/ksiegarnie
 
 ### get all ksiegarnie with params
-GET http://localhost:8080/webapi/ksiegarnie?phrase=abc
+GET http://localhost:8080/webapi/ksiegarnie?phrase=foo
 custom-header: custom-value
 Cookie: some-cookie=some-value
 
