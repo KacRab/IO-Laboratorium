@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 
-@ControllerAdvice(basePackages = "example.web.rest")
+@ControllerAdvice(basePackages = "org.example.web.rest")
 @RequiredArgsConstructor
 @Slf4j
 public class VodAdvice {

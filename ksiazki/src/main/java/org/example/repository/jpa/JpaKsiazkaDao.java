@@ -2,6 +2,7 @@ package org.example.repository.jpa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.example.model.Autor;
 import org.example.model.Ksiazka;
 import org.example.model.Ksiegarnia;
@@ -44,6 +45,7 @@ public class JpaKsiazkaDao implements KsiazkaDao {
     }
 
     @Override
+    @Transactional
     public Ksiazka add(Ksiazka k) {
         entityManager.persist(k);
         return k;
