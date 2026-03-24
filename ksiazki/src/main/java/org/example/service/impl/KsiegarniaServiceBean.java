@@ -6,6 +6,7 @@ import org.example.repository.KsiazkaDao;
 import org.example.repository.KsiegarniaDao;
 import org.example.service.KsiegarniaService;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,7 @@ public class KsiegarniaServiceBean implements KsiegarniaService {
         return ksiegarniaDao.findByKsiazka(m);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Ksiegarnia addKsiegarnia(Ksiegarnia ksiegarnia) {
         log.info("adding new ksiegarnia " + ksiegarnia);

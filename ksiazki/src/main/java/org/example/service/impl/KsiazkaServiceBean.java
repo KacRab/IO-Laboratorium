@@ -9,6 +9,8 @@ import org.example.repository.KsiegarniaDao;
 import org.example.service.KsiazkaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -79,11 +81,17 @@ public class KsiazkaServiceBean implements KsiazkaService {
         return autorDao.findById(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
     public Ksiazka addKsiazka(Ksiazka m) {
         log.info("about to add ksiazka " + m);
-        return ksiazkaDao.add(m);
+        m = ksiazkaDao.add(m);
+        if (m.getTitle().equals("Apocalypse Now"))
+            throw new RuntimeException("not yet!");
+        return m;
     }
 
+    @Override
     public Autor addAutor(Autor d) {
         log.info("about to add autor " + d);
         return autorDao.add(d);
